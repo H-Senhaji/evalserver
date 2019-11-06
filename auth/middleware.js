@@ -79,7 +79,7 @@ function authMiddleWare(req, res, next) {
         .catch(next);
     } catch (error) {
       res.status(400).send({
-        message: `Error ${error.name}: ${error.message}`
+        message: `Error ${error.email}: ${error.message}`
       });
     }
   } else {
