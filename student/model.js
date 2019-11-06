@@ -9,6 +9,10 @@ const Student = db.define("student", {
   },
   surName: {
       type: Sequelize.STRING
+  },
+  batchId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 });
 
