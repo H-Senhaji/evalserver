@@ -1,17 +1,15 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db");
-
 const Batch = sequelize.define("batch", {
   number: {
     type: Sequelize.INTEGER,
-    allowNull: false
   },
   start_date: {
-    type: Sequelize.DATE,
+    type: Sequelize.INTEGER,
     field: "start"
   },
   end_date: {
-      type: Sequelize.DATE,
+      type: Sequelize.INTEGER,
       field: "end" 
   }
 });

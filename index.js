@@ -1,9 +1,14 @@
 const express = require('express')
+//part of node.js
+//manage everything, from routes, to handling requests and views.
+
 
 //middlewares
 const bodyParser = require("body-parser");
 const cors = require("cors");
+
 const bodyParserMiddleWare = bodyParser.json();
+//
 const corsMiddleWare = cors();
 
 //routers
@@ -24,17 +29,15 @@ const port = process.env.PORT || 4000;
 
 
 
-// const loggingMiddleWare = (req, res, next) => {
-//     console.log("I am a middleware", Date.now());
-//     next(); // everything is ok -> next()
-//   };
-
 app
-// .use(loggingMiddleWare)
 .use(corsMiddleWare)
+//cross-origin-resource allows cross domain communication
 .use(bodyParserMiddleWare)
+//extracts body of incoming req -> easier interface
 .use(userRouter)
+//signup
 .use(authRouter)
+//login
 .use(batchRouter)
 .use(studentRouter)
 
@@ -42,19 +45,24 @@ app
     console.log(`App is listening on port ${port}`);
   });
 
-db.sync({})
+db.sync({  })
 .then(() => {
     console.log('Database schema has been updated')
-
-const batchNumbers = [31, 30, 29]
-
-const batches = batchNumbers.map(batchNumber => Batch.create({ number: batchNumber }));
+//?? seeddata
+const batch = [
+  { number: 21, start_date: 121212, end_date: 131313 },
+  { number: 22, start_date: 131313, end_date: 141414 },
+  { number: 23, start_date: 141414, end_date: 151515 }
+]
+const batches = batch.map(batch => Batch.create({ batch }));
 return Promise.all(batches);
 })
 .then(() => {
   const students = [
-    { firstName: "Lorelai", surName: "Gilmore", batchId: 1},
-    { firstName: "Rory", surName: "Gilmore", batchId: 2 },
+    { fullName: "Lorelai Gilmore", batchId: 1, color: "yellow" },
+    { fullName: "Rory Gilmore", batchId: 2, color: "green" },
+    { fullName: "Elon Musk", batchId: 3, color: "red"}
+  //seeddata
   ];
 
   const studentPromises = students.map(student => Student.create(student));
