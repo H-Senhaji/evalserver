@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const Student = require("./model");
 const Batch = require("../batches/model");
-
+const Evaluations = require("../evaluations/model")
 const router = new Router();
 
 //DONE
@@ -15,7 +15,7 @@ router.get("/students", (req, res, next) => {
 
 //DONE 
 router.get("/students/:id", (req, res, next) => {
-  Student.findByPk(req.params.id, { include: [Batch] })
+  Student.findByPk(req.params.id, { include: [Batch, Evaluations] })
     .then(student => {
       res.send(student);
     })
